@@ -48,6 +48,10 @@ async function login(page) {
     const e = document.elementFromPoint(580, 465);
     return e ? { tag: e.tagName, id: e.id, className: String(e.className).slice(0, 100) } : null;
   });
+  if (report.loginHitTarget?.id === 'ta-app-loading') {
+    // A transparent loading layer persists above the rendered, updating app.
+    await page.locator('#ta-app-loading').evaluate(el => { el.style.pointerEvents = 'none'; });
+  }
   await page.mouse.click(580, 465); // Observed "立即登录" button after closing gift sheet.
   await page.waitForTimeout(500);
   await page.screenshot({ path: path.join(OUT, 'after-login-click.png') });
