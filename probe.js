@@ -44,13 +44,8 @@ async function login(page) {
   }
   await enableSemantics(page);
   report.stage = 'login_entry';
-  const loginButton = page.getByRole('button', { name: /登录|注册/ });
-  if (await loginButton.count()) await loginButton.first().click();
-  else {
-    const loginText = page.getByText(/登录并升级会员|登录\/注册/).first();
-    if (await loginText.count()) await loginText.click();
-    else await page.mouse.click(580, 465); // Observed "立即登录" button after closing gift sheet.
-  }
+  await page.mouse.click(580, 465); // Observed "立即登录" button after closing gift sheet.
+  await page.waitForTimeout(500);
   report.stage = 'login_form';
   const passwordMode = page.getByText('密码登录', { exact: true });
   if (await passwordMode.count()) await passwordMode.first().click();
