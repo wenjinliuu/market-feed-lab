@@ -106,7 +106,7 @@ async function main() {
   });
 
   report.stage = 'open_site';
-  await page.goto('https://alpha.lxaa.top/?ref=ckui8xn8#/home', { waitUntil: 'domcontentloaded', timeout: 30000 });
+  await page.goto('https://alpha.lxaa.top/#/home', { waitUntil: 'domcontentloaded', timeout: 30000 });
   await login(page);
   collecting = true;
   report.stage = 'news';
