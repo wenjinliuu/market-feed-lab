@@ -1,14 +1,19 @@
 {
-  "startedAt": "2026-09-29T06:56:04.845Z",
-  "runId": "36533660199",
+  "startedAt": "2026-09-29T06:57:51.412Z",
+  "runId": "36533826396",
   "stage": "login_form",
   "observations": [],
   "errors": [
     "login_form: locator.waitFor: Timeout 15000ms exceeded.\nCall log:\n  - waiting for locator('input[type=\"password\"]').first() to be visible\n"
   ],
+  "loginHitTarget": {
+    "tag": "DIV",
+    "id": "ta-app-loading",
+    "className": "ta-app-loading"
+  },
   "visibleInputs": [],
   "visibleButtons": [
     ""
   ],
-  "finishedAt": "2026-09-29T06:56:27.471Z"
+  "finishedAt": "2026-09-29T06:58:13.397Z"
 }
