@@ -1,0 +1,7 @@
+{
+  "name": "tradealpha-actions-probe",
+  "private": true,
+  "version": "0.1.0",
+  "scripts": { "probe": "node probe.js" },
+  "dependencies": { "playwright": "1.62.1" }
+}
