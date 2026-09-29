@@ -1,6 +1,6 @@
 {
-  "startedAt": "2026-09-29T07:02:11.775Z",
-  "runId": "36534231153",
+  "startedAt": "2026-09-29T07:09:59.531Z",
+  "runId": "36534971627",
   "stage": "login_form",
   "observations": [],
   "errors": [
@@ -11,9 +11,12 @@
     "id": "ta-app-loading",
     "className": "ta-app-loading"
   },
+  "pagesAfterLoginClick": [
+    "https://alpha.lxaa.top/#/home"
+  ],
   "visibleInputs": [],
   "visibleButtons": [
     ""
   ],
-  "finishedAt": "2026-09-29T07:02:36.271Z"
+  "finishedAt": "2026-09-29T07:10:24.820Z"
 }
