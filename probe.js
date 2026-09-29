@@ -64,7 +64,14 @@ async function login(page) {
   if (await passwordMode.count()) await passwordMode.first().click();
 
   const password = page.locator('input[type="password"]');
-  await password.first().waitFor({ state: 'visible', timeout: 15000 });
+  try { await password.first().waitFor({ state: 'visible', timeout: 5000 }); }
+  catch {
+    // The homepage CTA reloaded the app in the headless runner. Try its account menu.
+    await page.mouse.click(1239, 28);
+    await page.waitForTimeout(500);
+    report.stage = 'account_menu';
+    await password.first().waitFor({ state: 'visible', timeout: 5000 });
+  }
   const username = page.locator('input[type="text"], input[type="tel"], input:not([type])').filter({ visible: true });
   if (!(await username.count())) throw new Error('Username input not found; inspect diagnostic screenshot to adjust Flutter login selector');
   await username.first().fill(process.env.TA_USERNAME);
@@ -93,9 +100,21 @@ async function main() {
     if (!['fetch', 'xhr', 'eventsource'].includes(request.resourceType()) && !/json|pdf|event-stream/i.test(type)) return;
     const entry = { kind: 'http', url: safeUrl(response.url()), method: request.method(),
       status: response.status(), resourceType: request.resourceType(), contentType: type };
+    if (new URL(response.url()).pathname === '/api/v1/news/search') {
+      const allowed = /^(page|page_size|limit|level|levels|source|sources|category|categories|start_date|end_date|keyword|sort)$/i;
+      entry.query = Object.fromEntries([...new URL(response.url()).searchParams].filter(([key]) => allowed.test(key)));
+    }
     if (/json/i.test(type)) {
       try { const body = await response.body(); entry.bytes = body.length;
-        if (body.length < 1_000_000) entry.shape = shape(JSON.parse(body.toString('utf8')));
+        if (body.length < 1_000_000) {
+          const parsed = JSON.parse(body.toString('utf8'));
+          entry.shape = shape(parsed);
+          if (new URL(response.url()).pathname === '/api/v1/news/search') {
+            const first = parsed?.data?.news_list?.[0];
+            entry.firstNews = first ? { id: first.id, datetime: first.datetime, level: first.level,
+              source: first.source, category: first.category, contentLength: first.content?.length } : null;
+          }
+        }
       } catch { entry.body = 'not JSON or unreadable'; }
     }
     report.observations.push(entry);
