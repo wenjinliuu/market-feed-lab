@@ -6,7 +6,8 @@ const path = require('node:path');
 const crypto = require('node:crypto');
 
 const OUT = path.join(process.cwd(), 'diagnostic');
-const report = { startedAt: new Date().toISOString(), stage: 'start', observations: [], errors: [] };
+const report = { startedAt: new Date().toISOString(), runId: process.env.GITHUB_RUN_ID || null,
+  stage: 'start', observations: [], errors: [] };
 let collecting = false;
 let browser;
 
@@ -35,7 +36,14 @@ async function login(page) {
   await enableSemantics(page);
   const skipGift = page.getByText('暂不领取，先看看', { exact: true });
   if (await skipGift.count()) await skipGift.first().click();
+  else {
+    // Flutter canvas may not expose the gift sheet through DOM semantics.
+    // Its skip control was observed at the bottom center of a 1280x720 viewport.
+    await page.mouse.click(640, 679);
+    await page.waitForTimeout(500);
+  }
   await enableSemantics(page);
+  report.stage = 'login_entry';
   const loginButton = page.getByRole('button', { name: /登录|注册/ });
   if (await loginButton.count()) await loginButton.first().click();
   else {
