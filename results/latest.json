@@ -1,0 +1,13 @@
+{
+  "startedAt": "2026-09-29T06:47:55.531Z",
+  "stage": "login",
+  "observations": [],
+  "errors": [
+    "login: locator.waitFor: Timeout 15000ms exceeded.\nCall log:\n  - waiting for locator('input[type=\"password\"]').first() to be visible\n"
+  ],
+  "visibleInputs": [],
+  "visibleButtons": [
+    ""
+  ],
+  "finishedAt": "2026-09-29T06:48:17.525Z"
+}
