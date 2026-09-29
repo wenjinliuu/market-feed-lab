@@ -70,6 +70,8 @@ async function login(page) {
     await page.mouse.click(1239, 28);
     await page.waitForTimeout(500);
     report.stage = 'account_menu';
+    await page.mouse.click(1201, 94); // "登录" item observed in the account dropdown.
+    await page.waitForTimeout(700);
     await password.first().waitFor({ state: 'visible', timeout: 5000 });
   }
   const username = page.locator('input[type="text"], input[type="tel"], input:not([type])').filter({ visible: true });
@@ -103,6 +105,10 @@ async function main() {
     if (new URL(response.url()).pathname === '/api/v1/news/search') {
       const allowed = /^(page|page_size|limit|level|levels|source|sources|category|categories|start_date|end_date|keyword|sort)$/i;
       entry.query = Object.fromEntries([...new URL(response.url()).searchParams].filter(([key]) => allowed.test(key)));
+      try { const posted = request.postDataJSON();
+        entry.bodyFilter = Object.fromEntries(Object.entries(posted || {}).filter(([key]) => allowed.test(key)));
+        entry.bodyKeys = Object.keys(posted || {});
+      } catch { entry.bodyKeys = []; }
     }
     if (/json/i.test(type)) {
       try { const body = await response.body(); entry.bytes = body.length;
