@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         TradeAlpha 请求结构诊断（仅本机）
 // @namespace    https://github.com/wenjinliuu/market-feed-lab
-// @version      0.1.0
+// @version      0.2.0
 // @description  仅记录 API 请求的路径、方法、字段名和状态；不记录请求值、正文或令牌
 // @match        https://alpha.lxaa.top/*
 // @run-at       document-start
@@ -36,6 +36,9 @@
   function fieldNames(body) {
     try {
       if (body == null) return [];
+      // Flutter/Dart XHR 常把 JSON 作为 UTF-8 字节数组提交。
+      if (ArrayBuffer.isView(body)) return fieldNames(new TextDecoder().decode(body));
+      if (body instanceof ArrayBuffer) return fieldNames(new TextDecoder().decode(body));
       if (body instanceof FormData || body instanceof URLSearchParams) {
         return [...new Set([...body.keys()].map(String))].slice(0, 40);
       }
@@ -80,6 +83,15 @@
       }
     }
     return result;
+  }
+
+  function xhrJson(request) {
+    if (request.responseType === 'json') return request.response;
+    if (request.responseType === '' || request.responseType === 'text') return JSON.parse(request.responseText);
+    const response = request.response;
+    if (response instanceof ArrayBuffer) return JSON.parse(new TextDecoder().decode(response));
+    if (ArrayBuffer.isView(response)) return JSON.parse(new TextDecoder().decode(response));
+    return null;
   }
 
   function add(row) {
@@ -152,8 +164,7 @@
           row.type = this.getResponseHeader('content-type')?.split(';')[0] || '';
           if (row.type.includes('json')) {
             try {
-              const json = this.responseType === 'json' ? this.response : JSON.parse(this.responseText);
-              row.responseFields = shape(json);
+              row.responseFields = shape(xhrJson(this));
             } catch (_) { /* binary or unreadable response */ }
           }
           add(row);
