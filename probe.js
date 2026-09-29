@@ -54,8 +54,12 @@ async function login(page) {
   }
   await page.mouse.click(580, 465); // Observed "立即登录" button after closing gift sheet.
   await page.waitForTimeout(500);
+  report.pagesAfterLoginClick = page.context().pages().map(p => p.url().split('?')[0]);
   await page.screenshot({ path: path.join(OUT, 'after-login-click.png') });
   report.stage = 'login_form';
+  const pages = page.context().pages();
+  if (pages.length > 1) page = pages[pages.length - 1];
+  await enableSemantics(page);
   const passwordMode = page.getByText('密码登录', { exact: true });
   if (await passwordMode.count()) await passwordMode.first().click();
 
