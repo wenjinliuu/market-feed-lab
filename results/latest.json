@@ -1,7 +1,7 @@
 {
-  "startedAt": "2026-09-29T07:12:43.739Z",
-  "runId": "36535239382",
-  "stage": "login_form",
+  "startedAt": "2026-09-29T07:26:04.062Z",
+  "runId": "36536533531",
+  "stage": "account_menu",
   "observations": [
     {
       "kind": "http",
@@ -36,11 +36,11 @@
     },
     {
       "kind": "http",
-      "url": "https://fonts.gstatic.com/s/roboto/v32/KFOmCnqEu92Fr1Me4GZLCzYlKw.woff2",
+      "url": "https://alpha.lxaa.top/assets/assets/fonts/AlibabaPuHuiTi/AlibabaPuHuiTi-3-55-Regular.otf",
       "method": "GET",
       "status": 200,
       "resourceType": "fetch",
-      "contentType": "font/woff2"
+      "contentType": "font/otf"
     },
     {
       "kind": "http",
@@ -60,11 +60,27 @@
     },
     {
       "kind": "http",
-      "url": "https://alpha.lxaa.top/assets/assets/fonts/AlibabaPuHuiTi/AlibabaPuHuiTi-3-55-Regular.otf",
+      "url": "https://fonts.gstatic.com/s/roboto/v32/KFOmCnqEu92Fr1Me4GZLCzYlKw.woff2",
+      "method": "GET",
+      "status": 200,
+      "resourceType": "fetch",
+      "contentType": "font/woff2"
+    },
+    {
+      "kind": "http",
+      "url": "https://alpha.lxaa.top/assets/assets/fonts/AlibabaPuHuiTi/AlibabaPuHuiTi-3-75-SemiBold.otf",
       "method": "GET",
       "status": 200,
       "resourceType": "fetch",
       "contentType": "font/otf"
+    },
+    {
+      "kind": "http",
+      "url": "https://alpha.lxaa.top/assets/packages/cupertino_icons/assets/CupertinoIcons.ttf",
+      "method": "GET",
+      "status": 200,
+      "resourceType": "fetch",
+      "contentType": "font/ttf"
     },
     {
       "kind": "http",
@@ -81,22 +97,6 @@
       "status": 200,
       "resourceType": "fetch",
       "contentType": "font/ttf"
-    },
-    {
-      "kind": "http",
-      "url": "https://alpha.lxaa.top/assets/packages/cupertino_icons/assets/CupertinoIcons.ttf",
-      "method": "GET",
-      "status": 200,
-      "resourceType": "fetch",
-      "contentType": "font/ttf"
-    },
-    {
-      "kind": "http",
-      "url": "https://alpha.lxaa.top/assets/assets/fonts/AlibabaPuHuiTi/AlibabaPuHuiTi-3-75-SemiBold.otf",
-      "method": "GET",
-      "status": 200,
-      "resourceType": "fetch",
-      "contentType": "font/otf"
     },
     {
       "kind": "http",
@@ -142,63 +142,6 @@
     },
     {
       "kind": "http",
-      "url": "https://api.lxaa.top/api/v1/news/config/levels",
-      "method": "GET",
-      "status": 200,
-      "resourceType": "xhr",
-      "contentType": "application/json",
-      "bytes": 91,
-      "shape": {
-        "success": "boolean",
-        "message": "string",
-        "data": {
-          "levels": {
-            "type": "array",
-            "length": 3,
-            "first": "string"
-          }
-        }
-      }
-    },
-    {
-      "kind": "http",
-      "url": "https://api.lxaa.top/api/v1/headlines",
-      "method": "GET",
-      "status": 200,
-      "resourceType": "xhr",
-      "contentType": "application/json",
-      "bytes": 15546,
-      "shape": {
-        "success": "boolean",
-        "message": "string",
-        "data": {
-          "items": {
-            "type": "array",
-            "length": 15,
-            "first": {
-              "id": "number",
-              "title": "string",
-              "summary": "string",
-              "cover_image": "string",
-              "source": "string",
-              "sort_order": "number",
-              "published_at": "string",
-              "updated_at": "string",
-              "content_type": "string",
-              "blog_id": "null",
-              "members_only": "boolean"
-            }
-          },
-          "total": "number",
-          "page": "number",
-          "page_size": "number",
-          "has_next": "boolean",
-          "as_of": "string"
-        }
-      }
-    },
-    {
-      "kind": "http",
       "url": "https://api.lxaa.top/api/v1/news/config/categories",
       "method": "GET",
       "status": 200,
@@ -217,54 +160,6 @@
             "super_company": "string",
             "social": "string",
             "entertainment_sports": "string"
-          }
-        }
-      }
-    },
-    {
-      "kind": "http",
-      "url": "https://api.lxaa.top/api/v1/news/config/sources",
-      "method": "GET",
-      "status": 200,
-      "resourceType": "xhr",
-      "contentType": "application/json",
-      "bytes": 328,
-      "shape": {
-        "success": "boolean",
-        "message": "string",
-        "data": {
-          "sources": {
-            "type": "array",
-            "length": 7,
-            "first": {
-              "value": "string",
-              "label": "string"
-            }
-          }
-        }
-      }
-    },
-    {
-      "kind": "http",
-      "url": "https://api.lxaa.top/api/v1/research-reports/filter-options",
-      "method": "GET",
-      "status": 200,
-      "resourceType": "xhr",
-      "contentType": "application/json",
-      "bytes": 6571,
-      "shape": {
-        "success": "boolean",
-        "message": "string",
-        "data": {
-          "concepts": {
-            "type": "array",
-            "length": 306,
-            "first": "string"
-          },
-          "industries": {
-            "type": "array",
-            "length": 104,
-            "first": "string"
           }
         }
       }
@@ -311,35 +206,26 @@
     },
     {
       "kind": "http",
-      "url": "https://api.lxaa.top/api/v1/dehydrated-reports/list",
+      "url": "https://api.lxaa.top/api/v1/research-reports/filter-options",
       "method": "GET",
       "status": 200,
       "resourceType": "xhr",
       "contentType": "application/json",
-      "bytes": 12132,
+      "bytes": 6571,
       "shape": {
         "success": "boolean",
         "message": "string",
         "data": {
-          "reports": {
+          "concepts": {
             "type": "array",
-            "length": 20,
-            "first": {
-              "id": "number",
-              "title": "string",
-              "summary": "string",
-              "created_at": "string",
-              "updated_at": "string",
-              "stocks": {
-                "type": "array",
-                "length": 0,
-                "first": null
-              }
-            }
+            "length": 306,
+            "first": "string"
           },
-          "total": "number",
-          "skip": "number",
-          "limit": "number"
+          "industries": {
+            "type": "array",
+            "length": 104,
+            "first": "string"
+          }
         }
       }
     },
@@ -382,6 +268,137 @@
             "locked_report_count": "number"
           }
         }
+      }
+    },
+    {
+      "kind": "http",
+      "url": "https://api.lxaa.top/api/v1/news/config/sources",
+      "method": "GET",
+      "status": 200,
+      "resourceType": "xhr",
+      "contentType": "application/json",
+      "bytes": 328,
+      "shape": {
+        "success": "boolean",
+        "message": "string",
+        "data": {
+          "sources": {
+            "type": "array",
+            "length": 7,
+            "first": {
+              "value": "string",
+              "label": "string"
+            }
+          }
+        }
+      }
+    },
+    {
+      "kind": "http",
+      "url": "https://api.lxaa.top/api/v1/news/config/levels",
+      "method": "GET",
+      "status": 200,
+      "resourceType": "xhr",
+      "contentType": "application/json",
+      "bytes": 91,
+      "shape": {
+        "success": "boolean",
+        "message": "string",
+        "data": {
+          "levels": {
+            "type": "array",
+            "length": 3,
+            "first": "string"
+          }
+        }
+      }
+    },
+    {
+      "kind": "http",
+      "url": "https://api.lxaa.top/api/v1/dehydrated-reports/list",
+      "method": "GET",
+      "status": 200,
+      "resourceType": "xhr",
+      "contentType": "application/json",
+      "bytes": 12132,
+      "shape": {
+        "success": "boolean",
+        "message": "string",
+        "data": {
+          "reports": {
+            "type": "array",
+            "length": 20,
+            "first": {
+              "id": "number",
+              "title": "string",
+              "summary": "string",
+              "created_at": "string",
+              "updated_at": "string",
+              "stocks": {
+                "type": "array",
+                "length": 0,
+                "first": null
+              }
+            }
+          },
+          "total": "number",
+          "skip": "number",
+          "limit": "number"
+        }
+      }
+    },
+    {
+      "kind": "http",
+      "url": "https://api.lxaa.top/api/v1/news/search",
+      "method": "POST",
+      "status": 200,
+      "resourceType": "xhr",
+      "contentType": "application/json",
+      "query": {},
+      "bytes": 128684,
+      "shape": {
+        "success": "boolean",
+        "message": "string",
+        "data": {
+          "news_list": {
+            "type": "array",
+            "length": 15,
+            "first": {
+              "id": "number",
+              "datetime": "string",
+              "content": "string",
+              "ai_interpretation": "string",
+              "level": "string",
+              "source": "string",
+              "category": "string",
+              "created_at": "string",
+              "is_favorited": "boolean",
+              "impact_summary": "null",
+              "images": {
+                "type": "array",
+                "length": 0,
+                "first": null
+              }
+            }
+          },
+          "pagination": {
+            "total_records": "number",
+            "total_pages": "number",
+            "current_page": "number",
+            "page_size": "number",
+            "has_next": "boolean",
+            "has_prev": "boolean"
+          },
+          "code": "number"
+        }
+      },
+      "firstNews": {
+        "id": 756289,
+        "datetime": "2026-09-28T23:16:36",
+        "level": "重要",
+        "source": "路透社",
+        "category": "市场与货币",
+        "contentLength": 37
       }
     },
     {
@@ -494,58 +511,38 @@
     },
     {
       "kind": "http",
-      "url": "https://api.lxaa.top/api/v1/news/search",
-      "method": "POST",
+      "url": "https://api.lxaa.top/api/v1/headlines",
+      "method": "GET",
       "status": 200,
       "resourceType": "xhr",
       "contentType": "application/json",
-      "bytes": 131717,
+      "bytes": 15546,
       "shape": {
         "success": "boolean",
         "message": "string",
         "data": {
-          "news_list": {
+          "items": {
             "type": "array",
             "length": 15,
             "first": {
               "id": "number",
-              "datetime": "string",
-              "content": "string",
-              "ai_interpretation": "string",
-              "level": "string",
+              "title": "string",
+              "summary": "string",
+              "cover_image": "string",
               "source": "string",
-              "category": "string",
-              "created_at": "string",
-              "is_favorited": "boolean",
-              "impact_summary": {
-                "hotspots": {
-                  "type": "array",
-                  "length": 2,
-                  "first": "..."
-                },
-                "concepts": {
-                  "type": "array",
-                  "length": 3,
-                  "first": "..."
-                },
-                "overflow_count": "number"
-              },
-              "images": {
-                "type": "array",
-                "length": 0,
-                "first": null
-              }
+              "sort_order": "number",
+              "published_at": "string",
+              "updated_at": "string",
+              "content_type": "string",
+              "blog_id": "null",
+              "members_only": "boolean"
             }
           },
-          "pagination": {
-            "total_records": "number",
-            "total_pages": "number",
-            "current_page": "number",
-            "page_size": "number",
-            "has_next": "boolean",
-            "has_prev": "boolean"
-          },
-          "code": "number"
+          "total": "number",
+          "page": "number",
+          "page_size": "number",
+          "has_next": "boolean",
+          "as_of": "string"
         }
       }
     },
@@ -567,7 +564,7 @@
     }
   ],
   "errors": [
-    "login_form: locator.waitFor: Timeout 15000ms exceeded.\nCall log:\n  - waiting for locator('input[type=\"password\"]').first() to be visible\n"
+    "account_menu: locator.waitFor: Timeout 5000ms exceeded.\nCall log:\n  - waiting for locator('input[type=\"password\"]').first() to be visible\n"
   ],
   "navigation": [
     "https://alpha.lxaa.top/#/home",
@@ -590,5 +587,5 @@
   "visibleButtons": [
     ""
   ],
-  "finishedAt": "2026-09-29T07:13:08.028Z"
+  "finishedAt": "2026-09-29T07:26:25.776Z"
 }
