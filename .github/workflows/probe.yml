@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
   push:
     branches: [main]
-    paths: [probe.js]
+    paths: [api-probe.js]
 permissions:
   contents: write
 concurrency:
@@ -27,10 +27,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - run: npm install --ignore-scripts
-      - run: npx playwright install --with-deps chromium
-      - name: One-time network and PDF probe
-        run: npm run probe
+      - name: One-time authenticated API and PDF probe
+        run: node api-probe.js
       - name: Keep private diagnostic result
         if: ${{ always() && github.event.repository.private }}
         uses: actions/upload-artifact@v4
