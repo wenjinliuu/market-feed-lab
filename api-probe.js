@@ -63,7 +63,10 @@ async function main() {
     count: Array.isArray(newsList) ? newsList.length : null, itemKeys: keys(first),
     paginationKeys: keys(news.data?.data?.pagination),
     firstMetadata: first ? { id: first.id, datetime: first.datetime, level: first.level,
-      source: first.source, category: first.category, contentLength: first.content?.length } : null });
+      source: first.source, category: first.category, contentLength: first.content?.length } : null,
+    firstFive: Array.isArray(newsList) ? newsList.slice(0, 5).map(x => ({
+      id: x.id, datetime: x.datetime, created_at: x.created_at, level: x.level
+    })) : [] });
   if (news.status !== 200 || news.data?.success !== true || !Array.isArray(newsList))
     throw Error('Authenticated news unavailable');
 
