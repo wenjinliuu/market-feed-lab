@@ -33,6 +33,15 @@ async function login(page) {
   if (!process.env.TA_USERNAME || !process.env.TA_PASSWORD) throw new Error('Missing TA_USERNAME or TA_PASSWORD repository secret');
   report.stage = 'login';
   await enableSemantics(page);
+  const skipGift = page.getByText('暂不领取，先看看', { exact: true });
+  if (await skipGift.count()) await skipGift.first().click();
+  await enableSemantics(page);
+  const loginButton = page.getByRole('button', { name: /登录|注册/ });
+  if (await loginButton.count()) await loginButton.first().click();
+  else {
+    const loginText = page.getByText(/登录并升级会员|登录\/注册/).first();
+    if (await loginText.count()) await loginText.click();
+  }
   const passwordMode = page.getByText('密码登录', { exact: true });
   if (await passwordMode.count()) await passwordMode.first().click();
 
@@ -119,7 +128,11 @@ async function main() {
   catch (error) {
     report.errors.push(`${report.stage}: ${error.message}`);
     try { const page = browser?.contexts()[0]?.pages()[0];
-      if (page) await page.screenshot({ path: path.join(OUT, 'failure.png') });
+      if (page) {
+        report.visibleInputs = await page.locator('input').evaluateAll(els => els.map(e => ({type:e.type, placeholder:e.placeholder}))).catch(() => []);
+        report.visibleButtons = (await page.getByRole('button').allTextContents().catch(() => [])).slice(0, 30);
+        await page.screenshot({ path: path.join(OUT, 'failure.png') });
+      }
     } catch { /* Ignore screenshot failure. */ }
     process.exitCode = 1;
   } finally {
