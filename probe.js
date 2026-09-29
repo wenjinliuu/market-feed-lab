@@ -44,8 +44,13 @@ async function login(page) {
   }
   await enableSemantics(page);
   report.stage = 'login_entry';
+  report.loginHitTarget = await page.evaluate(() => {
+    const e = document.elementFromPoint(580, 465);
+    return e ? { tag: e.tagName, id: e.id, className: String(e.className).slice(0, 100) } : null;
+  });
   await page.mouse.click(580, 465); // Observed "立即登录" button after closing gift sheet.
   await page.waitForTimeout(500);
+  await page.screenshot({ path: path.join(OUT, 'after-login-click.png') });
   report.stage = 'login_form';
   const passwordMode = page.getByText('密码登录', { exact: true });
   if (await passwordMode.count()) await passwordMode.first().click();
