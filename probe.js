@@ -81,6 +81,11 @@ async function main() {
   browser = await chromium.launch({ headless: true });
   const context = await browser.newContext({ acceptDownloads: true });
   const page = await context.newPage();
+  report.navigation = [];
+  page.on('framenavigated', frame => {
+    if (frame === page.mainFrame() && report.navigation.length < 15) report.navigation.push(safeUrl(frame.url()) + '#' + (new URL(frame.url())).hash.slice(1));
+  });
+  page.on('pageerror', error => { if (report.errors.length < 10) report.errors.push('pageerror: ' + String(error).slice(0, 200)); });
   page.on('response', async response => {
     if (!collecting) return;
     const request = response.request();
@@ -124,6 +129,7 @@ async function main() {
   });
 
   report.stage = 'open_site';
+  collecting = true; // Capture the guest feed too, even if headless login fails.
   await page.goto('https://alpha.lxaa.top/#/home', { waitUntil: 'domcontentloaded', timeout: 30000 }); // Clean URL, no referral.
   await login(page);
   collecting = true;
